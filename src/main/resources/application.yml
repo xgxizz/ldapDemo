@@ -1,0 +1,19 @@
+#spring.ldap.urls=ldap://192.168.0.13:389
+#spring.ldap.username=admin
+#spring.ldap.password=ldap
+#spring.ldap.base=dc=ldapDemo
+#spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
+#spring.datasource.url= jdbc:mysql://localhost:3306/ra?useUnicode:true&characterEncoding:utf8&serverTimezone:UTC
+#spring.datasource.username=root
+#spring.datasource.password=123456
+#spring.datasource.driverClassName=com.mysql.jdbc.Driver
+
+spring:
+  ldap:
+    urls: ldap://192.168.233.120:389
+    password: abc123
+    username: cn=Manager,dc=zhidaoauto,dc=com
+    base: dc=zhidaoauto,dc=com
+#  embedded:
+#    ldif: ldap-server.ldif
+#    base-dn: didispace,dc=com
