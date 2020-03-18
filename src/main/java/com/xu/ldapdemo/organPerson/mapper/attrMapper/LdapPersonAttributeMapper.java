@@ -1,6 +1,6 @@
-package com.xu.ldapdemo.mapper;
+package com.xu.ldapdemo.organPerson.mapper.attrMapper;
 
-import com.xu.ldapdemo.entity.LdapPerson;
+import com.xu.ldapdemo.organPerson.entity.LdapOrganPerson;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.stereotype.Service;
 
@@ -8,10 +8,10 @@ import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
 
 @Service
-public class LdapPersonAttributeMapper implements AttributesMapper<LdapPerson>{
+public class LdapPersonAttributeMapper implements AttributesMapper<LdapOrganPerson>{
     @Override
-    public LdapPerson mapFromAttributes(Attributes attributes) throws NamingException {
-        LdapPerson person = new LdapPerson();
+    public LdapOrganPerson mapFromAttributes(Attributes attributes) throws NamingException {
+        LdapOrganPerson person = new LdapOrganPerson();
         person.setGivenName((String) attributes.get("givenName").get());
         person.setCn((String) attributes.get("cn").get());
         person.setDisplayName((String) attributes.get("displayName").get());

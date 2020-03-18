@@ -1,6 +1,6 @@
 package com.xu.ldapdemo.repository.organ;
 
-import com.xu.ldapdemo.reposity.LdapOrganRepository;
+import com.xu.ldapdemo.organPerson.repository.LdapOrganRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

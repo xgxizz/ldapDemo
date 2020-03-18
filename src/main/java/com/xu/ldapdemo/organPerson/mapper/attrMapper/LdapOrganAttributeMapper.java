@@ -1,6 +1,6 @@
-package com.xu.ldapdemo.mapper;
+package com.xu.ldapdemo.organPerson.mapper.attrMapper;
 
-import com.xu.ldapdemo.entity.LdapOrgan;
+import com.xu.ldapdemo.organPerson.entity.LdapOrgan;
 import org.springframework.ldap.core.AttributesMapper;
 
 import javax.naming.NamingException;

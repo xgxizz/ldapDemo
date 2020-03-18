@@ -1,6 +1,6 @@
-package com.xu.ldapdemo.reposity;
+package com.xu.ldapdemo.organPerson.repository;
 
-import com.xu.ldapdemo.entity.LdapOrgan;
+import com.xu.ldapdemo.organPerson.entity.LdapOrgan;
 
 import java.util.List;
 

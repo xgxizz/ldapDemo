@@ -1,4 +1,4 @@
-package com.xu.ldapdemo.entity;
+package com.xu.ldapdemo.organPerson.entity;
 
 import lombok.Data;
 

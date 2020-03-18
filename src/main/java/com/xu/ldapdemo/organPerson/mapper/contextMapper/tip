@@ -1,0 +1,17 @@
+我们可以直接按名称检索属性值，而不必经历Attributesand Attribute类。
+在使用多值属性时，这特别有用。从多值属性中提取值通常需要遍历NamingEnumeration从Attributes实现返回的属性值。
+DirContextAdapter通过getStringAttributes() 或getObjectAttributes()方法为您完成此操作
+
+demo:来自官网
+private static class PersonContextMapper implements ContextMapper {
+   public Object mapFromContext(Object ctx) {
+      DirContextAdapter context = (DirContextAdapter)ctx;
+      Person p = new Person();
+      p.setFullName(context.getStringAttribute("cn"));
+      p.setLastName(context.getStringAttribute("sn"));
+      p.setDescription(context.getStringAttribute("description"));
+      // The roleNames property of Person is an String array
+      p.setRoleNames(context.getStringAttributes("roleNames"));
+      return p;
+   }
+}

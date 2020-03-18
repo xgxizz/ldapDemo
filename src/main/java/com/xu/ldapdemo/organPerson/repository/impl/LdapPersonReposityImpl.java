@@ -1,8 +1,9 @@
-package com.xu.ldapdemo.reposity.impl;
+package com.xu.ldapdemo.organPerson.repository.impl;
 
-import com.xu.ldapdemo.entity.LdapPerson;
-import com.xu.ldapdemo.mapper.LdapPersonAttributeMapper;
-import com.xu.ldapdemo.reposity.LdapPersonRepository;
+import com.xu.ldapdemo.organPerson.entity.LdapOrganPerson;
+import com.xu.ldapdemo.organPerson.mapper.attrMapper.LdapPersonAttributeMapper;
+import com.xu.ldapdemo.organPerson.mapper.contextMapper.LdapPersonContextMapper;
+import com.xu.ldapdemo.organPerson.repository.LdapPersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.query.LdapQuery;
@@ -10,9 +11,7 @@ import org.springframework.ldap.support.LdapNameBuilder;
 import org.springframework.stereotype.Service;
 
 import javax.naming.Name;
-import javax.naming.directory.Attributes;
-import javax.naming.directory.BasicAttribute;
-import javax.naming.directory.BasicAttributes;
+import javax.naming.directory.*;
 import java.util.List;
 import java.util.Vector;
 
@@ -24,7 +23,7 @@ public class LdapPersonReposityImpl implements LdapPersonRepository {
     @Autowired
     private LdapTemplate ldapTemplate;
     @Override
-    public List<LdapPerson> getPersonNamesByLastName(String lastName) {
+    public List<LdapOrganPerson> getPersonNamesByLastName(String lastName) {
         Vector<String> vector = new Vector<String>();
         vector.add("posixAccount");
         vector.add("top");
@@ -40,18 +39,39 @@ public class LdapPersonReposityImpl implements LdapPersonRepository {
     }
 
     @Override
-    public void create(LdapPerson person) {
+    public void create(LdapOrganPerson person) {
         Name dn = buildDn(person);
+        //DirContext dirContext = DirContextAdapter.
         ldapTemplate.bind(dn, null, buildAttributes(person));
     }
 
     @Override
-    public void delete(LdapPerson person) {
+    public void delete(LdapOrganPerson person) {
         Name dn = buildDn(person);
         ldapTemplate.unbind(dn);
     }
 
-    private Attributes buildAttributes(LdapPerson person) {
+    @Override
+    public void updateUseRebind(LdapOrganPerson person) {
+        Name dn = buildDn(person);
+        ldapTemplate.rebind(dn, null, buildAttributes(person));
+    }
+
+    @Override
+    public void updateUseModifyAttributes(LdapOrganPerson person) {
+        Name dn = buildDn(person);
+        Attribute attr = new BasicAttribute("description", person.getDescription());
+        ModificationItem item = new ModificationItem(DirContext.REPLACE_ATTRIBUTE, attr);
+        ldapTemplate.modifyAttributes(dn, new ModificationItem[] {item});
+    }
+
+    @Override
+    public LdapOrganPerson findByPrimaryKey(LdapOrganPerson person) {
+        Name dn = buildDn(person);
+        return ldapTemplate.lookup(dn, new LdapPersonContextMapper());
+    }
+
+    private Attributes buildAttributes(LdapOrganPerson person) {
         Attributes attrs = new BasicAttributes();
         BasicAttribute ocattr = new BasicAttribute("objectclass");
         ocattr.add("posixAccount");
@@ -60,13 +80,16 @@ public class LdapPersonReposityImpl implements LdapPersonRepository {
         attrs.put(ocattr);
         attrs.put("cn", person.getCn());
         attrs.put("sn", person.getSn());
+        attrs.put("displayName", person.getDisplayName());
+        attrs.put("givenName", person.getGivenName());
+        attrs.put("description", person.getDescription());
         attrs.put("uid", "123");
         attrs.put("gidNumber","88");
         attrs.put("uidNumber","23424");
         attrs.put("homeDirectory", "ou=people");
         return attrs;
     }
-    protected Name buildDn(LdapPerson p) {
+    protected Name buildDn(LdapOrganPerson p) {
         return LdapNameBuilder.newInstance("ou=People")
 //                .add("cn", p.getCn())
 //                .add("displayName", p.getDisplayName())

@@ -1,8 +1,8 @@
-package com.xu.ldapdemo.reposity.impl;
+package com.xu.ldapdemo.organPerson.repository.impl;
 
-import com.xu.ldapdemo.entity.LdapOrgan;
-import com.xu.ldapdemo.mapper.LdapOrganAttributeMapper;
-import com.xu.ldapdemo.reposity.LdapOrganRepository;
+import com.xu.ldapdemo.organPerson.entity.LdapOrgan;
+import com.xu.ldapdemo.organPerson.mapper.attrMapper.LdapOrganAttributeMapper;
+import com.xu.ldapdemo.organPerson.repository.LdapOrganRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.stereotype.Service;
