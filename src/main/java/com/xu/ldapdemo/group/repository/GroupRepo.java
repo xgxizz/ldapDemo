@@ -1,9 +1,10 @@
 package com.xu.ldapdemo.group.repository;
 
-import com.xu.ldapdemo.person.entity.Person;
+import com.xu.ldapdemo.group.entity.Group;
 
 public interface GroupRepo {
 
-    void addMemberToGroup(String groupName, Person p);
-    void removeMemberFromGroup(String groupName, Person p);
+    Group createGroup(Group group);
+    void addMemberToGroup(String groupName, com.xu.ldapdemo.odm.entity.Person person);
+    void removeMemberFromGroup(String groupName, com.xu.ldapdemo.odm.entity.Person person);
 }

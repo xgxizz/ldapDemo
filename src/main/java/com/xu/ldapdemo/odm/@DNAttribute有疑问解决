@@ -1,0 +1,10 @@
+  //@DnAttribute 表示dn属性到对象类字段的映射。因为dn中没有company这个字段，只含有“o”这个字段，我们需要将“o”对应的值映射给“company”，
+    /**
+        * index说明
+        * 完整的dn:cn=jsdj,o=zhyu,cn=person0318,dc=zhidaoauto,dc=com
+        * 树状结构：
+        * dc=zhidaoauto,dc=com
+        *      cn=person0318           ..................................................index=0
+        *          o=zhyu              ..................................................index=1
+        *              cn=jsdj         ..................................................index=2
+        */

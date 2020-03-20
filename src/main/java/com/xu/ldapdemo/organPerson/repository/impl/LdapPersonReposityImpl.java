@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.query.LdapQuery;
 import org.springframework.ldap.support.LdapNameBuilder;
+import org.springframework.ldap.support.LdapUtils;
 import org.springframework.stereotype.Service;
 
 import javax.naming.Name;
@@ -90,6 +91,7 @@ public class LdapPersonReposityImpl implements LdapPersonRepository {
         return attrs;
     }
     protected Name buildDn(LdapOrganPerson p) {
+        //LdapUtils.n
         return LdapNameBuilder.newInstance("ou=People")
 //                .add("cn", p.getCn())
 //                .add("displayName", p.getDisplayName())
